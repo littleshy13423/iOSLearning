@@ -11,7 +11,7 @@ struct CardView: View {
     typealias tpCard = MemoryGame<String>.Card
     
     let card: tpCard
-
+    
     init(_ card: MemoryGame<String>.Card) {
         self.card = card
     }
@@ -25,26 +25,26 @@ struct CardView: View {
             static let smallest: CGFloat = 10
             static let scaleFactor = smallest/largest
         }
+        struct Pie{
+            static let opacity: CGFloat = 0.4
+            static let inset: CGFloat = 5
+        }
     }
     
     var body: some View {
-        ZStack {
-            let base: RoundedRectangle = RoundedRectangle(cornerRadius: 12)
-            Group{
-                base.fill(.white)
-                base.strokeBorder(lineWidth: Constants.lineWidth)
+        Pie(endAngle: .degrees(240))
+            .opacity(Constants.Pie.opacity)
+            .overlay(
                 Text(card.content)
                     .font(.system(size: Constants.FontSize.largest))
                     .minimumScaleFactor(Constants.FontSize.scaleFactor)
                     .multilineTextAlignment(.center)
                     .aspectRatio(1, contentMode: .fit)
-                    .padding(Constants.inset)
-            }
-            .opacity(card.isFacedUp ? 1:0)
-            base.fill()
-                .opacity(card.isFacedUp ? 0:1)
-        }
-        .opacity(card.isFacedUp || !card.isMatched ? 1:0)
+                    .padding(Constants.Pie.inset)
+            )
+            .padding(Constants.inset)
+            .cardify(isFacedUp: card.isFacedUp)
+            .opacity(card.isFacedUp || !card.isMatched ? 1:0)
     }
 }
 

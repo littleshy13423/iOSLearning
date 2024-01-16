@@ -27,18 +27,15 @@ struct EmojiMemoryGameView: View {
     @ViewBuilder
     var cards: some View{
         AspectVGrid(viewModel.cards, aspectRatio: aspectRatio){ card in
-                    CardView(card)
-                        .aspectRatio(aspectRatio, contentMode: .fit)
-                        .padding(4)
-                        .onTapGesture {
-                            viewModel.choose(card)
-                        }
+            CardView(card)
+                .aspectRatio(aspectRatio, contentMode: .fit)
+                .padding(4)
+                .onTapGesture {
+                    viewModel.choose(card)
+                }
         }
     }
 }
-
-
-
 
 struct EmojiMemoryGameView_Preview: PreviewProvider{
     static var previews: some View{
